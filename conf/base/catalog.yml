@@ -1,0 +1,65 @@
+# Here you can define all your data sets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://docs.kedro.org/en/stable/data/data_catalog.html
+
+raw_user_meta_data: 
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/u.user
+  layer: raw
+  load_args:
+    delimiter: "|"
+    names: ["user_id","age","gender","occupation","zip_code"]
+    usecols: ["user_id","age","gender"]
+  
+raw_content_meta_data: 
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/u.item
+  load_args:
+    encoding : 'latin-1'
+    delimiter: "|"
+    names: ["movie_id","movie_title","release_date","video_release_date","IMDb_URL","unknown","Action","Adventure","Animation","Children's","Comedy","Crime","Documentary","Drama","Fantasy","Film-Noir","Horror","Musical","Mystery","Romance","Sci-Fi","Thriller","War","Western"]
+    usecols: ["movie_id","movie_title","release_date","video_release_date","unknown","Action","Adventure","Animation","Children's","Comedy","Crime","Documentary","Drama","Fantasy","Film-Noir","Horror","Musical","Mystery","Romance","Sci-Fi","Thriller","War","Western"]
+
+raw_user_action_data: 
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/u.data
+  load_args:
+    delimiter: "\t"
+    names: ["user_id","item_id","rating","timestamp"]
+    usecols: ["user_id","item_id","rating"]
+
+cleaned_user_meta_data: 
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/cleaned_user_meta_data.csv
+  layer: primary
+
+cleaned_content_meta_data: 
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/cleaned_content_meta_data.csv
+  layer: primary
+
+cleaned_user_action_data: 
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/cleaned_user_action_data.csv
+  layer: primary
+
+#interaction_matrix:
+#  type: scipy.sparse.COOMatrix
+#  filepath: data/04_feature/interaction_matrix.npz
+
+#item_features_matrix:
+#  type: scipy.sparse.COOMatrix
+#  filepath: data/04_feature/item_features_matrix.npz
+  
+#user_features_matrix:
+#  type: scipy.sparse.COOMatrix
+#  filepath: data/04_feature/user_features_matrix.npz
+
+#training_interactions_set:
+#  type: scipy.sparse.COOMatrix
+#  filepath: data/04_feature/training_interactions_set.npz
+
+#testing_interactions_set:
+#  type: scipy.sparse.COOMatrix
+#  filepath: data/04_feature/testing_interactions_set.npz
